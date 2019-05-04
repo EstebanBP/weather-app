@@ -8,15 +8,15 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 4px solid green;
 `;
 
-const H1 = styled.h1`
-  font-size: ${FONT_SIZES.XL};
+const H1 = styled.p`
+  font-size: 1.5em;
+  margin: 0
 `;
 
-const H2 = styled.h1`
-  font-size: ${FONT_SIZES.M};
+const H2 = styled.p`
+  font-size: 0.7em;
 `;
 
 const Header = ({ city }) => {

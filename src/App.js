@@ -12,16 +12,17 @@ const Container = styled.div`
   padding: 20px;
   justify-content: center;
   align-items: center;
-  /*   background-image: url("bgImage2.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center; */
+  background-image: url('bgImage2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const Panel = styled.div`
   border: 7px solid blue;
   width: 90%;
 `;
+
 const SearchBar = styled.input`
   min-height: 40px;
   width: 300px;

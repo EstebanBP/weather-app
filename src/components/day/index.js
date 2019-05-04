@@ -5,32 +5,34 @@ import { IconContext } from 'react-icons';
 import { WiHail } from 'react-icons/wi';
 
 const Container = styled.div`
-  border: 2px solid blue;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 25px;
+  flex: 1;
+  background-color: rgba(0, 0, 50, 0.8);
+  padding: 10px;
 `;
 
 const Title = styled.p`
-  border: 2px solid blue;
   text-align: center;
+  font-size: 0.8em;
 `;
 
 const Temperature = styled.p`
-  border: 2px solid blue;
   text-align: center;
+  font-size: 0.8em;
 `;
 
 const WeatherIcon = () => (
-  <IconContext.Provider value={{ color: 'red' }}>
+  <IconContext.Provider value={{ color: 'white' }}>
     <div
       style={{
         display: 'flex',
         justifyContent: 'center',
         width: 'fit-content',
-        border: '1px solid red'
+        'border-radius': '100px',
+        'background-color': 'rgba(100,100,100,0.6)'
       }}
     >
       <WiHail size={50} />
@@ -43,7 +45,7 @@ const Day = ({ name, temperature }) => {
     <Container>
       <Title>{name}</Title>
       <WeatherIcon />
-      <Temperature>{temperature}</Temperature>
+      <Temperature>{"+28º"}</Temperature>
     </Container>
   );
 };
