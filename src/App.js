@@ -1,59 +1,89 @@
 import React from 'react';
-import './App.css';
 import styled from 'styled-components/macro';
 import InfoPanel from './components/infoPanel';
 import Day from './components/day';
 
+const blur = '20px';
+const url =
+  'https://d13k13wj6adfdf.cloudfront.net/urban_areas/san-francisco-bay-area_web-f17b1f60e6.jpg';
+// const url = "bgImage2.jpg";
 const Container = styled.div`
-  border: 5px solid red;
   min-height: 100vh;
+  position: fixed;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  background-image: url('bgImage2.jpg');
+  z-index: 3;
+  padding: 0px 0px 50px 0px;
+`;
+
+const Panel = styled.div`
+  width: 90%;
+  background-image: url('${url}');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 `;
 
-const Panel = styled.div`
-  border: 7px solid blue;
-  width: 90%;
-`;
-
 const SearchBar = styled.input`
   min-height: 40px;
-  width: 300px;
-  border: 2px solid black;
+  width: 40%;
+  min-width: 300px;
+  font-size: 1em;
+  padding-left: 0.5em;
   border-radius: 20px;
+  border: 1px solid white;
+  background: transparent;
 `;
 
 const DaysPanel = styled.div`
-  border: 7px solid pink;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
+const BackgroundBlurredImage = styled.div`
+  position: fixed;
+  top: -${blur}; right: -${blur}; bottom: -${blur}; left: -${blur};
+  z-index: 1;
+
+  display: flex;
+  min-height: 100vh;
+  background-image: url('${url}');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+
+  -webkit-filter: blur(${blur});
+  -moz-filter: blur(${blur});
+  -o-filter: blur(${blur});
+  -ms-filter: blur(${blur});
+  filter: blur(${blur});
+`;
+
 function App() {
   return (
-    <Container>
-      <Panel>
-        <InfoPanel />
-        <DaysPanel>
-          <Day />
-          <Day />
-          <Day />
-          <Day />
-          <Day />
-          <Day />
-          <Day />
-        </DaysPanel>
-      </Panel>
-      <SearchBar />
-    </Container>
+    <div>
+      <BackgroundBlurredImage />
+      <Container>
+        <SearchBar placeholder="Search city..." />
+        <Panel>
+          <InfoPanel />
+          <DaysPanel>
+            <Day />
+            <Day />
+            <Day />
+            <Day />
+            <Day />
+            <Day />
+            <Day />
+          </DaysPanel>
+        </Panel>
+      </Container>
+    </div>
   );
 }
 

@@ -25,18 +25,17 @@ const Temperature = styled.p`
 `;
 
 const WeatherIcon = () => (
-  <IconContext.Provider value={{ color: 'white' }}>
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        width: 'fit-content',
-        'border-radius': '100px',
-        'background-color': 'rgba(100,100,100,0.6)'
-      }}
-    >
-      <WiHail size={50} />
-    </div>
+  <IconContext.Provider
+    value={{
+      color: 'white',
+      style: {
+        borderRadius: '1em',
+        backgroundColor: 'rgba(100,100,100,0.6)'
+      },
+      size: '2em'
+    }}
+  >
+    <WiHail />
   </IconContext.Provider>
 );
 
@@ -45,7 +44,7 @@ const Day = ({ name, temperature }) => {
     <Container>
       <Title>{name}</Title>
       <WeatherIcon />
-      <Temperature>{"+28º"}</Temperature>
+      <Temperature>{'+28º'}</Temperature>
     </Container>
   );
 };

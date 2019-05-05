@@ -11,7 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
 `;
 
 const InfoPanel = () => (

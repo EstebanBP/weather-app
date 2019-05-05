@@ -36,7 +36,7 @@ const InfoLine = ({ text }) => (
         <WiHail />
       </div>
     </IconContext.Provider>
-    <p style={{ margin: '5px' }}>{text}</p>
+    <p style={{ margin: '5px',  }}>{text}</p>
   </Line>
 );
 
