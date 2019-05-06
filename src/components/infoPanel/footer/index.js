@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
+import { BACKGROUND_FONT_COLOR } from '../../../constants';
 
 const WeatherText = styled.p`
-  background-color: rgba(100,100,100,0.8);
+  background-color: ${BACKGROUND_FONT_COLOR};
   padding: 5px;
   border-radius: 10px;
   font-size: 0.8em;

@@ -18,8 +18,7 @@ html {
 }
 
 p, input {
-  color: #ffffff;
-  
+  color: #ffffff; 
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

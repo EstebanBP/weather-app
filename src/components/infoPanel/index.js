@@ -14,12 +14,15 @@ const Container = styled.div`
   padding: 25px;
 `;
 
-const InfoPanel = () => (
-  <Container>
-    <Header />
-    <Body />
-    <Footer />
-  </Container>
-);
+const InfoPanel = ({ currentInfo }) => {
+  const { city, country } = currentInfo;
+  return (
+    <Container>
+      <Header {...{ city, country }} />
+      <Body />
+      <Footer />
+    </Container>
+  );
+};
 
 export default InfoPanel;

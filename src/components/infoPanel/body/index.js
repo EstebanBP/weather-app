@@ -29,6 +29,7 @@ const Line = styled.div`
   flex-direction: row;
   align-items: center;
 `;
+
 const InfoLine = ({ text }) => (
   <Line>
     <IconContext.Provider value={{ color: 'white', size: '2em' }}>
@@ -36,7 +37,7 @@ const InfoLine = ({ text }) => (
         <WiHail />
       </div>
     </IconContext.Provider>
-    <p style={{ margin: '5px',  }}>{text}</p>
+    <p style={{ margin: '5px' }}>{text}</p>
   </Line>
 );
 
@@ -45,7 +46,6 @@ const WeatherIcon = () => (
     value={{
       color: 'white',
       size: '8em',
-      style: { verticalAlign: 'middle' }
     }}
   >
     <WiHail />

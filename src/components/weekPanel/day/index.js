@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
-import { IconContext } from 'react-icons';
-import { WiHail } from 'react-icons/wi';
+import WeatherIcon from '../../common/weatherIcon';
+import { getSymbol } from '../../../utils/misc';
 
 const Container = styled.div`
   display: flex;
@@ -24,39 +24,27 @@ const Temperature = styled.p`
   font-size: 0.8em;
 `;
 
-const WeatherIcon = () => (
-  <IconContext.Provider
-    value={{
-      color: 'white',
-      style: {
-        borderRadius: '1em',
-        backgroundColor: 'rgba(100,100,100,0.6)'
-      },
-      size: '2em'
-    }}
-  >
-    <WiHail />
-  </IconContext.Provider>
-);
-
-const Day = ({ name, temperature }) => {
+const Day = ({ weekDayName, temperature, icon }) => {
+  const symbol = getSymbol(temperature);
   return (
     <Container>
-      <Title>{name}</Title>
-      <WeatherIcon />
-      <Temperature>{'+28º'}</Temperature>
+      <Title>{weekDayName}</Title>
+      <WeatherIcon
+        icon={icon}
+        style={{ borderRadius: '1em', backgroundColor: 'rgba(100,100,100,0.6)' }}
+      />
+      <Temperature>{`${symbol}${temperature}°`}</Temperature>
     </Container>
   );
 };
 
 Day.propTypes = {
-  name: PropTypes.string,
+  weekDayName: PropTypes.string.isRequired,
   temperature: PropTypes.number
 };
 
 Day.defaultProps = {
-  name: 'Monday',
-  temperature: 32
+  temperature: null
 };
 
 export default Day;

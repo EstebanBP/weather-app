@@ -12,28 +12,31 @@ const Container = styled.div`
 
 const H1 = styled.p`
   font-size: 1.5em;
-  margin: 0
+  margin: 0;
 `;
 
 const H2 = styled.p`
   font-size: 0.7em;
 `;
 
-const Header = ({ city }) => {
+const Header = ({ city, country }) => {
+  const title = `${city}${country ? '(' + country + ')' : ''}`;
   return (
     <Container>
-      <H1>{city}</H1>
+      <H1>{title}</H1>
       <H2>{new Date().toDateString()}</H2>
     </Container>
   );
 };
 
 Header.propTypes = {
-  city: PropTypes.string
+  city: PropTypes.string,
+  country: PropTypes.string
 };
 
 Header.defaultProps = {
-  city: 'New York'
+  city: 'New York',
+  country: null
 };
 
 export default Header;

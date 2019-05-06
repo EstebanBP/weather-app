@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import InfoPanel from './components/infoPanel';
-import Day from './components/day';
+import WeekPanel from './components/weekPanel';
+import SearchBar from './components/searchBar';
+import Loader from './components/loader';
+import OpenWeather from './utils/openweather';
 
 const blur = '20px';
 const url =
@@ -28,23 +31,6 @@ const Panel = styled.div`
   background-position: center center;
 `;
 
-const SearchBar = styled.input`
-  min-height: 40px;
-  width: 40%;
-  min-width: 300px;
-  font-size: 1em;
-  padding-left: 0.5em;
-  border-radius: 20px;
-  border: 1px solid white;
-  background: transparent;
-`;
-
-const DaysPanel = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
 const BackgroundBlurredImage = styled.div`
   position: fixed;
   top: -${blur}; right: -${blur}; bottom: -${blur}; left: -${blur};
@@ -64,27 +50,41 @@ const BackgroundBlurredImage = styled.div`
   filter: blur(${blur});
 `;
 
-function App() {
-  return (
-    <div>
-      <BackgroundBlurredImage />
-      <Container>
-        <SearchBar placeholder="Search city..." />
-        <Panel>
-          <InfoPanel />
-          <DaysPanel>
-            <Day />
-            <Day />
-            <Day />
-            <Day />
-            <Day />
-            <Day />
-            <Day />
-          </DaysPanel>
-        </Panel>
-      </Container>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      currentInfo: null,
+      weeklyInfo: null
+    };
+  }
+  componentDidMount() {
+    OpenWeather.getCityWeather('Madrid')
+      .then(({ currentInfo, weeklyInfo }) => {
+        console.log({ currentInfo, weeklyInfo });
+        this.setState({ currentInfo, weeklyInfo, loading: false });
+      })
+      .catch(error => console.log({ error }));
+  }
+
+  render() {
+    const { currentInfo, weeklyInfo } = this.state;
+    return (
+      <div>
+        <BackgroundBlurredImage />
+        <Container>
+          <SearchBar placeholder="Search city..." />
+          {currentInfo && (
+            <Panel>
+              <InfoPanel {...{ currentInfo }} />
+              <WeekPanel {...{ weeklyInfo }} />
+            </Panel>
+          )}
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default App;
