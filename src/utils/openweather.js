@@ -21,6 +21,7 @@ const parseCurrent = response => {
     name,
     sys: { country },
     main: { humidity, pressure, temp },
+    wind: { speed },
     weather
   } = response;
   const { description, icon, main } = (weather && weather[0]) || {};
@@ -29,6 +30,7 @@ const parseCurrent = response => {
     country,
     weather: { description, icon, main },
     temperature: Math.round(temp),
+    wind: speed,
     humidity,
     pressure
   };
@@ -69,10 +71,10 @@ const parseWeekly = response => {
 const getCityWeather = async cityName => {
   const currentResponse = await getCurrentWeather(cityName);
   const currentData = await currentResponse.json();
+  console.log({ currentData });
   const cityId = currentData.id;
   const weeklyResponse = await getWeeklyWeather(cityId);
   const weeklyData = await weeklyResponse.json();
-  console.log({ weeklyData });
   return {
     currentInfo: parseCurrent(currentData),
     weeklyInfo: parseWeekly(weeklyData)

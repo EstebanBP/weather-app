@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
-import { WiHail } from 'react-icons/wi';
-import { IconContext } from 'react-icons';
+import { WiBarometer, WiHumidity, WiStrongWind } from 'react-icons/wi';
+import WeatherIcon from '../../common/weatherIcon';
+import OpenWeatherIcon from '../../common/openWeatherIcon';
+import { getSymbol } from '../../../utils/misc';
 
 const Container = styled.div`
   display: flex;
@@ -30,32 +32,19 @@ const Line = styled.div`
   align-items: center;
 `;
 
-const InfoLine = ({ text }) => (
+const InfoLine = ({ text, icon }) => (
   <Line>
-    <IconContext.Provider value={{ color: 'white', size: '2em' }}>
-      <div>
-        <WiHail />
-      </div>
-    </IconContext.Provider>
+    <WeatherIcon Icon={icon} />
     <p style={{ margin: '5px' }}>{text}</p>
   </Line>
 );
 
-const WeatherIcon = () => (
-  <IconContext.Provider
-    value={{
-      color: 'white',
-      size: '8em',
-    }}
-  >
-    <WiHail />
-  </IconContext.Provider>
-);
-
-const Body = ({ temperature }) => {
+const Body = ({ temperature, icon, humidity, pressure, wind }) => {
+  const symbol = getSymbol(temperature);
+  console.log({ icon });
   return (
     <Container>
-      <Temperature>{`${temperature}º`}</Temperature>
+      <Temperature>{`${symbol}${temperature}°`}</Temperature>
       <div
         style={{
           flex: 0,
@@ -63,23 +52,21 @@ const Body = ({ temperature }) => {
           justifyContent: 'center'
         }}
       >
-        <WeatherIcon />
+        <OpenWeatherIcon size="8em" icon={icon} />
       </div>
       <InfoContainer>
-        <InfoLine text="743 mm Hg" />
-        <InfoLine text="46% humidity" />
-        <InfoLine text="2m/s NW" />
+        <InfoLine text={`${pressure} mm Hg`} icon={WiBarometer} />
+        <InfoLine text={`${humidity}% humidity`} icon={WiHumidity} />
+        <InfoLine text={`${wind}m/s NW`} icon={WiStrongWind} />
       </InfoContainer>
     </Container>
   );
 };
 
 Body.propTypes = {
-  temperature: PropTypes.string
+  temperature: PropTypes.number
 };
 
-Body.defaultProps = {
-  temperature: '+25'
-};
+Body.defaultProps = {};
 
 export default Body;

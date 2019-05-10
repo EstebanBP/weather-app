@@ -2,15 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledSpinner = styled.svg`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  align-self: center;
+  margin: 5px;
   animation: rotate 2s linear infinite;
-  margin: -25px 0 0 -25px;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
 
   & .path {
     stroke: #5652bf;
