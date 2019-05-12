@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import Header from './header';
@@ -14,17 +15,20 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 50px 25px;
-  background-image: url('${url}');
+  background-image: url('${props => props.imageUrl}');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 `;
 
-const InfoPanel = ({ currentInfo }) => {
+const InfoPanel = ({ imageUrl, currentInfo }) => {
+  if (!currentInfo) {
+    return null;
+  }
   const { city, country, temperature, humidity, pressure, wind, weather } = currentInfo;
   const { icon, description } = weather;
   return (
-    <Container>
+    <Container {...{ imageUrl }}>
       <Header {...{ city, country }} />
       <Body {...{ temperature, icon, humidity, pressure, wind }} />
       <Footer {...{ description }} />
@@ -32,4 +36,6 @@ const InfoPanel = ({ currentInfo }) => {
   );
 };
 
-export default InfoPanel;
+const mapStateToProps = ({ currentInfo, imageUrl }) => ({ currentInfo, imageUrl });
+
+export default connect(mapStateToProps)(InfoPanel);

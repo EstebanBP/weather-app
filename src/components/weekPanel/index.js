@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
 import Day from './day';
 
 const Container = styled.div`
@@ -8,12 +10,18 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const WeekPanel = ({ weeklyInfo }) => (
-  <Container>
-    {weeklyInfo.map(dayInfo => {
-      return <Day key={dayInfo.weekDayName} {...dayInfo} />;
-    })}
-  </Container>
-);
+const WeekPanel = ({ weeklyInfo }) => {
+  if (!weeklyInfo) {
+    return null;
+  }
+  return (
+    <Container>
+      {weeklyInfo.map(dayInfo => {
+        return <Day key={dayInfo.weekDayName} {...dayInfo} />;
+      })}
+    </Container>
+  );
+};
 
-export default WeekPanel;
+const mapStateToProps = ({ weeklyInfo }) => ({ weeklyInfo });
+export default connect(mapStateToProps)(WeekPanel);

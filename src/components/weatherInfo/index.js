@@ -6,11 +6,7 @@ import InfoPanel from '../infoPanel';
 import WeekPanel from '../weekPanel';
 import SearchBar from '../searchBar';
 
-// TODO: Mirar rem en lugar de em para fuentes
 const blur = '20px';
-const url =
-  'https://d13k13wj6adfdf.cloudfront.net/urban_areas/san-francisco-bay-area_web-f17b1f60e6.jpg';
-// const url = "bgImage2.jpg";
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -36,7 +32,7 @@ const BackgroundBlurredImage = styled.div`
   top: -${blur}; right: -${blur}; bottom: -${blur}; left: -${blur};
   z-index: 1;
 
-  background-image: url('${url}');
+  background-image: url('${props => props.imageUrl}');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -48,9 +44,9 @@ const BackgroundBlurredImage = styled.div`
   filter: blur(${blur});
 `;
 
-const WeatherInfo = ({ currentInfo, weeklyInfo, fetchByCity, error }) => {
+const WeatherInfo = ({ fetchByCity, imageUrl, error }) => {
   React.useEffect(() => {
-    fetchByCity('Barcelona');
+    fetchByCity('Madrid');
   }, [fetchByCity]);
   React.useEffect(() => {
     if (error) {
@@ -59,15 +55,13 @@ const WeatherInfo = ({ currentInfo, weeklyInfo, fetchByCity, error }) => {
   }, [error]);
   return (
     <AppWrapper>
-      <BackgroundBlurredImage />
+      <BackgroundBlurredImage {...{ imageUrl }} />
       <Container>
         <SearchBar />
-        {currentInfo && (
-          <Panel>
-            <InfoPanel {...{ currentInfo }} />
-            <WeekPanel {...{ weeklyInfo }} />
-          </Panel>
-        )}
+        <Panel>
+          <InfoPanel />
+          <WeekPanel />
+        </Panel>
       </Container>
     </AppWrapper>
   );

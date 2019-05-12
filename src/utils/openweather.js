@@ -7,6 +7,17 @@ const END_POINTS = {
   WeekWeather: 'data/2.5/forecast'
 };
 
+const ImagesDict = {
+  3117735: 'madrid.png',
+  3128760: 'barcelona.jpg',
+  5128581: 'new york.jpg',
+}
+
+const getImageUrl = cityId => {
+  // return 'https://artisal.com/wp-content/uploads/PANORAMICA-GRANDE-2-New-York-Joan-Vendrell.jpg';
+  return ImagesDict[cityId] || 'generica.jpg';
+};
+
 const getUrl = (endPoint, parameters = {}) => {
   const base = `${BASE_URL}/${endPoint}`;
   parameters.APPID = API_KEY;
@@ -79,8 +90,10 @@ const getCityWeather = async cityName => {
   if (weeklyResponse.status !== 200) {
     throw new Error(weeklyResponse.statusText || 'unknown error');
   }
+  console.log({ currentData });
   const weeklyData = await weeklyResponse.json();
   return {
+    imageUrl: getImageUrl(currentData.id),
     currentInfo: parseCurrent(currentData),
     weeklyInfo: parseWeekly(weeklyData)
   };

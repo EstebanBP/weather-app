@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from '../actions/weather';
 
 const initialState = {
+  imageUrl: 'generica.jpg',
   searchText: null,
   currentInfo: null,
   weeklyInfo: null,

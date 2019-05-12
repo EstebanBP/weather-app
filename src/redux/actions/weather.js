@@ -8,7 +8,7 @@ export const ACTION_TYPES = {
 function requestStart(searchText) {
   return {
     type: ACTION_TYPES.REQUEST_STARTED,
-    payload: searchText,
+    payload: searchText
   };
 }
 
@@ -28,12 +28,12 @@ function requestFailed(error) {
 
 const fetchByCity = city => {
   const searchText = city;
-  return (dispatch, getState, { api }) => {
+  return (dispatch, _, { api }) => {
     dispatch(requestStart(searchText));
     api
       .getCityWeather(city)
-      .then(({ currentInfo, weeklyInfo }) => {
-        dispatch(requestSucceed({ searchText, currentInfo, weeklyInfo }));
+      .then(({ imageUrl, currentInfo, weeklyInfo }) => {
+        dispatch(requestSucceed({ searchText, imageUrl, currentInfo, weeklyInfo }));
       })
       .catch(error => {
         dispatch(requestFailed(error));
