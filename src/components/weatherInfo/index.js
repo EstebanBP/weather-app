@@ -11,15 +11,19 @@ const blur = '20px';
 const url =
   'https://d13k13wj6adfdf.cloudfront.net/urban_areas/san-francisco-bay-area_web-f17b1f60e6.jpg';
 // const url = "bgImage2.jpg";
-const Container = styled.div`
+
+const AppWrapper = styled.div`
   min-height: 100vh;
-  position: relative;
+  display: flex;
+`;
+
+const Container = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   z-index: 3;
-  border: 1px solid red;
   padding: 25px 0px 25px 0px;
 `;
 
@@ -32,8 +36,6 @@ const BackgroundBlurredImage = styled.div`
   top: -${blur}; right: -${blur}; bottom: -${blur}; left: -${blur};
   z-index: 1;
 
-  display: flex;
-  min-height: 100vh;
   background-image: url('${url}');
   background-repeat: no-repeat;
   background-size: cover;
@@ -51,7 +53,7 @@ const WeatherInfo = ({ currentInfo, weeklyInfo, fetchByCity }) => {
     fetchByCity('Barcelona');
   }, [fetchByCity]);
   return (
-    <div>
+    <AppWrapper>
       <BackgroundBlurredImage />
       <Container>
         <SearchBar />
@@ -62,7 +64,7 @@ const WeatherInfo = ({ currentInfo, weeklyInfo, fetchByCity }) => {
           </Panel>
         )}
       </Container>
-    </div>
+    </AppWrapper>
   );
 };
 
