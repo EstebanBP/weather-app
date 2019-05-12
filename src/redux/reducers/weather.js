@@ -5,7 +5,7 @@ const initialState = {
   currentInfo: null,
   weeklyInfo: null,
   loading: false,
-  error: null
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {

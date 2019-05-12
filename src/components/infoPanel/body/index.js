@@ -9,27 +9,28 @@ import { getSymbol } from '../../../utils/misc';
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  width: 70%;
 `;
-
+const Part = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Temperature = styled.p`
-  font-size: 6em;
+  font-size: 5em;
   font-weight: 200;
   margin: 5px;
   text-align: center;
-  flex: 1;
 `;
 
 const IconContainer = styled.div`
   display: flex;
-  flex: 1;
   justify-content: center;
 `;
 
-const InfoContainer = styled.div`
-  flex: 1;
-`;
+const InfoContainer = styled.div``;
 
 const Line = styled.div`
   display: flex;
@@ -53,15 +54,21 @@ const Body = ({ temperature, icon, humidity, pressure, wind }) => {
   const symbol = getSymbol(temperature);
   return (
     <Container>
-      <Temperature>{`${symbol}${temperature}°`}</Temperature>
-      <IconContainer>
-        <OpenWeatherIcon size="8em" icon={icon} />
-      </IconContainer>
-      <InfoContainer>
-        <InfoLine text={`${pressure} mm Hg`} icon={WiBarometer} />
-        <InfoLine text={`${humidity}% humidity`} icon={WiHumidity} />
-        <InfoLine text={`${wind}m/s NW`} icon={WiStrongWind} />
-      </InfoContainer>
+      <Part>
+        <Temperature>{`${symbol}${temperature}°`}</Temperature>
+      </Part>
+      <Part>
+        <IconContainer>
+          <OpenWeatherIcon size="8em" icon={icon} />
+        </IconContainer>
+      </Part>
+      <Part>
+        <InfoContainer>
+          <InfoLine text={`${pressure} mm Hg`} icon={WiBarometer} />
+          <InfoLine text={`${humidity}% humidity`} icon={WiHumidity} />
+          <InfoLine text={`${wind}m/s NW`} icon={WiStrongWind} />
+        </InfoContainer>
+      </Part>
     </Container>
   );
 };
