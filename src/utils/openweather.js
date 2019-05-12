@@ -10,12 +10,12 @@ const END_POINTS = {
 const ImagesDict = {
   3117735: 'madrid.png',
   3128760: 'barcelona.jpg',
-  5128581: 'new york.jpg',
-}
+  5128581: 'new york.jpg'
+};
 
 const getImageUrl = cityId => {
   // return 'https://artisal.com/wp-content/uploads/PANORAMICA-GRANDE-2-New-York-Joan-Vendrell.jpg';
-  return ImagesDict[cityId] || 'generica.jpg';
+  return `${process.env.PUBLIC_URL}/img/${ImagesDict[cityId] || 'generica.jpg'}`;
 };
 
 const getUrl = (endPoint, parameters = {}) => {
