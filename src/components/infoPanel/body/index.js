@@ -8,18 +8,23 @@ import { getSymbol } from '../../../utils/misc';
 
 const Container = styled.div`
   display: flex;
-  width: 80%;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 `;
 
 const Temperature = styled.p`
-  flex: 1;
   font-size: 6em;
   font-weight: 200;
   margin: 5px;
-  text-align: right;
+  text-align: center;
+  flex: 1;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
 `;
 
 const InfoContainer = styled.div`
@@ -30,30 +35,23 @@ const Line = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 const InfoLine = ({ text, icon }) => (
   <Line>
     <WeatherIcon Icon={icon} />
-    <p style={{ margin: '5px' }}>{text}</p>
+    <p style={{ margin: '5px', 'white-space': 'nowrap' }}>{text}</p>
   </Line>
 );
-
 const Body = ({ temperature, icon, humidity, pressure, wind }) => {
   const symbol = getSymbol(temperature);
-  console.log({ icon });
   return (
     <Container>
       <Temperature>{`${symbol}${temperature}°`}</Temperature>
-      <div
-        style={{
-          flex: 0,
-          display: 'flex',
-          justifyContent: 'center'
-        }}
-      >
+      <IconContainer>
         <OpenWeatherIcon size="8em" icon={icon} />
-      </div>
+      </IconContainer>
       <InfoContainer>
         <InfoLine text={`${pressure} mm Hg`} icon={WiBarometer} />
         <InfoLine text={`${humidity}% humidity`} icon={WiHumidity} />

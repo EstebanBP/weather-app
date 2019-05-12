@@ -10,9 +10,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-left: 1px;
-  padding: 10px;
+  padding: 15px;
   border-top: 3px solid ${props => props.colors.main};
   background-color: ${props => props.colors.background};
 `;
@@ -40,7 +40,7 @@ const Day = ({ weekDayName, temperature, icon }) => {
       <Title>{weekDayName}</Title>
       <OpenWeatherIcon
         icon={icon}
-        style={{ borderRadius: '1em', backgroundColor: 'rgba(100,100,100,0.6)' }}
+        style={{ borderRadius: '2em', backgroundColor: 'rgba(100,100,100,0.6)', padding: '5px' }}
       />
       <Temperature>{`${symbol}${temperature}°`}</Temperature>
     </Container>

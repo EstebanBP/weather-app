@@ -13,7 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 25px;
+  padding: 50px 25px;
   background-image: url('${url}');
   background-repeat: no-repeat;
   background-size: cover;
