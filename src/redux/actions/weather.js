@@ -5,9 +5,10 @@ export const ACTION_TYPES = {
   REQUEST_FAILED: 'request_failed'
 };
 
-function requestStart() {
+function requestStart(searchText) {
   return {
-    type: ACTION_TYPES.REQUEST_STARTED
+    type: ACTION_TYPES.REQUEST_STARTED,
+    payload: searchText,
   };
 }
 
@@ -26,12 +27,13 @@ function requestFailed(error) {
 }
 
 const fetchByCity = city => {
+  const searchText = city;
   return (dispatch, getState, { api }) => {
-    dispatch(requestStart());
+    dispatch(requestStart(searchText));
     api
       .getCityWeather(city)
-      .then(({ searchText: city, currentInfo, weeklyInfo }) => {
-        dispatch(requestSucceed({ currentInfo, weeklyInfo }));
+      .then(({ currentInfo, weeklyInfo }) => {
+        dispatch(requestSucceed({ searchText, currentInfo, weeklyInfo }));
       })
       .catch(error => {
         dispatch(requestFailed(error));

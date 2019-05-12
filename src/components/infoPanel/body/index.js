@@ -38,10 +38,15 @@ const Line = styled.div`
   justify-content: center;
 `;
 
+const InfoText = styled.p`
+  margin: 5px;
+  white-space: nowrap;
+`;
+
 const InfoLine = ({ text, icon }) => (
   <Line>
     <WeatherIcon Icon={icon} />
-    <p style={{ margin: '5px', 'white-space': 'nowrap' }}>{text}</p>
+    <InfoText>{text}</InfoText>
   </Line>
 );
 const Body = ({ temperature, icon, humidity, pressure, wind }) => {

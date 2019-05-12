@@ -21,7 +21,7 @@ const parseCurrent = response => {
     name,
     sys: { country },
     main: { humidity, pressure, temp },
-    wind: { speed },
+    wind: { speed },
     weather
   } = response;
   const { description, icon, main } = (weather && weather[0]) || {};
@@ -70,10 +70,15 @@ const parseWeekly = response => {
 
 const getCityWeather = async cityName => {
   const currentResponse = await getCurrentWeather(cityName);
+  if (currentResponse.status !== 200) {
+    throw new Error(currentResponse.statusText || 'unknown error');
+  }
   const currentData = await currentResponse.json();
-  console.log({ currentData });
   const cityId = currentData.id;
   const weeklyResponse = await getWeeklyWeather(cityId);
+  if (weeklyResponse.status !== 200) {
+    throw new Error(weeklyResponse.statusText || 'unknown error');
+  }
   const weeklyData = await weeklyResponse.json();
   return {
     currentInfo: parseCurrent(currentData),

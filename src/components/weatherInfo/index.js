@@ -48,10 +48,15 @@ const BackgroundBlurredImage = styled.div`
   filter: blur(${blur});
 `;
 
-const WeatherInfo = ({ currentInfo, weeklyInfo, fetchByCity }) => {
+const WeatherInfo = ({ currentInfo, weeklyInfo, fetchByCity, error }) => {
   React.useEffect(() => {
     fetchByCity('Barcelona');
   }, [fetchByCity]);
+  React.useEffect(() => {
+    if (error) {
+      window.alert(error);
+    }
+  }, [error]);
   return (
     <AppWrapper>
       <BackgroundBlurredImage />
