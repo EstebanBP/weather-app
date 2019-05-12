@@ -6,10 +6,11 @@ import styled from 'styled-components/macro';
 import Loader from '../loader';
 
 const Container = styled.div`
+  display: flex;
   width: 40%;
   min-width: 300px;
   min-height: 40px;
-  display: flex;
+  margin-bottom: 30px;
   border-radius: 20px;
   border: 1px solid white;
 `;

@@ -13,19 +13,17 @@ const url =
 // const url = "bgImage2.jpg";
 const Container = styled.div`
   min-height: 100vh;
-  position: fixed;
-  left: 0;
-  right: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   z-index: 3;
-  padding: 50px 0px 50px 0px;
+  border: 1px solid red;
+  padding: 25px 0px 25px 0px;
 `;
 
 const Panel = styled.div`
-  height: 90%;
   width: 90%;
 `;
 
