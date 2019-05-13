@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components/macro';
 import { fetchByCity } from '../../redux/actions/weather';
@@ -45,10 +46,11 @@ const Panel = styled.div`
 `;
 
 const WeatherInfo = ({ fetchByCity, imageUrl, error }) => {
-  React.useEffect(() => {
+  useEffect(() => {
     fetchByCity('Madrid');
   }, [fetchByCity]);
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (error) {
       window.alert(error);
     }
@@ -65,6 +67,17 @@ const WeatherInfo = ({ fetchByCity, imageUrl, error }) => {
       </Container>
     </AppWrapper>
   );
+};
+
+WeatherInfo.propTypes = {
+  fetchByCity: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string,
+  error: PropTypes.string
+};
+
+WeatherInfo.defaultProps = {
+  imageUrl: null,
+  error: null
 };
 
 const mapStateToProps = weather => {

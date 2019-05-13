@@ -26,6 +26,16 @@ function requestFailed(error) {
   };
 }
 
+/**
+ * TODO: It would be a good idea to create some kind of cache on redux to avoid repeating the
+ * same search during 10 minutes (Recommended time on api docs)
+ * {
+ *  key: based on id and dt properties
+ *  texts: texts that matched this result
+ *  fetchDate: date of first time this result has been received
+ *  values: currentInfo, weeklyInfo, imageUrl
+ * }
+ */
 const fetchByCity = city => {
   const searchText = city;
   return (dispatch, _, { api }) => {

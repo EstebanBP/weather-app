@@ -17,6 +17,11 @@ const ImagesDict = {
   5128581: 'new york.jpg'
 };
 
+/**
+ * I have not found any reliable and easy to implement api to get city images based on location so
+ * I implemented some test images. It might be done using google places api and openweather response
+ * coords
+ */
 const getImageUrl = cityId => {
   return `${process.env.PUBLIC_URL}/img/${ImagesDict[cityId] || defaultImage}`;
 };
@@ -37,8 +42,10 @@ const getUrl = (endPoint, parameters = {}) => {
  * Formalize current weather response
  */
 const parseCurrent = response => {
+  console.log({ response });
   const {
     name,
+    dt,
     sys: { country },
     main: { humidity, pressure, temp },
     wind: { speed },
@@ -48,6 +55,7 @@ const parseCurrent = response => {
   return {
     city: name,
     country,
+    date: new Date(dt * 1000), // dt to ms
     weather: { description, icon, main },
     temperature: Math.round(temp),
     wind: speed,
