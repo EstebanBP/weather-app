@@ -2,31 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components/macro';
 import { fetchByCity } from '../../redux/actions/weather';
-import InfoPanel from '../infoPanel';
-import WeekPanel from '../weekPanel';
-import SearchBar from '../searchBar';
-
-const blur = '20px';
+import InfoPanel from './infoPanel';
+import WeekPanel from './weekPanel';
+import SearchBar from '../SearchBar';
+// import BackgroundAnimatedImage from '../BackgroundAnimatedImage';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
   display: flex;
 `;
 
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 3;
-  padding: 25px 0px 25px 0px;
-`;
-
-const Panel = styled.div`
-  width: 90%;
-`;
-
+const blur = '20px';
 const BackgroundBlurredImage = styled.div`
   position: fixed;
   top: -${blur}; right: -${blur}; bottom: -${blur}; left: -${blur};
@@ -44,6 +30,20 @@ const BackgroundBlurredImage = styled.div`
   filter: blur(${blur});
 `;
 
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 3;
+  padding: 25px 0px 25px 0px;
+`;
+
+const Panel = styled.div`
+  width: 90%;
+`;
+
 const WeatherInfo = ({ fetchByCity, imageUrl, error }) => {
   React.useEffect(() => {
     fetchByCity('Madrid');
@@ -55,7 +55,7 @@ const WeatherInfo = ({ fetchByCity, imageUrl, error }) => {
   }, [error]);
   return (
     <AppWrapper>
-      <BackgroundBlurredImage {...{ imageUrl }} />
+      <BackgroundBlurredImage blurred {...{ imageUrl }} />
       <Container>
         <SearchBar />
         <Panel>

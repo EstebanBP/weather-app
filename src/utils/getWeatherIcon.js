@@ -8,16 +8,27 @@ import {
   WiNightAltRain,
   WiThunderstorm,
   WiSnow,
-  WiWindy
+  WiWindy,
+  WiNa
 } from 'react-icons/wi';
 
 const opacity = 0.05;
-const SUNNY = { main: 'rgba(240, 255, 0, 1)', background: `rgba(240, 255, 0, ${opacity})` };
+const opacityHover = 0.6;
+const SUNNY = {
+  main: 'rgba(240, 255, 0, 1)',
+  background: `rgba(240, 255, 0, ${opacity})`,
+  hover: `rgba(240, 255, 0, ${opacityHover})`
+};
 const CLOUDY = {
   main: 'rgba(236, 236, 236, 1)',
-  background: `rgba(189, 195, 199, ${opacity + 0.3})` // Higher opacity for grey color
+  background: `rgba(189, 195, 199, ${opacity + 0.3})`, // Higher opacity for grey color
+  hover: `rgba(189, 195, 199, ${opacityHover + 0.3})` // Higher opacity for grey color
 };
-const RAINY = { main: 'rgba(25, 181, 254, 1)', background: `rgba(25, 181, 254, ${opacity})` };
+const RAINY = {
+  main: 'rgba(25, 181, 254, 1)',
+  background: `rgba(25, 181, 254, ${opacity})`,
+  hover: `rgba(25, 181, 254, ${opacityHover})`
+};
 const openweatherIcons = {
   '01d': { icon: WiDaySunny, color: SUNNY },
   '01n': { icon: WiDaySunny, color: SUNNY },
@@ -36,11 +47,12 @@ const openweatherIcons = {
   '13d': { icon: WiSnow, color: RAINY },
   '13n': { icon: WiSnow, color: RAINY },
   '50d': { icon: WiWindy, color: RAINY },
-  '50n': { icon: WiWindy, color: RAINY }
+  '50n': { icon: WiWindy, color: RAINY },
+  default: { icon: WiNa, color: CLOUDY }
 };
 
 const getWeatherIcon = openweatherIconName => {
-  return openweatherIcons[openweatherIconName];
+  return openweatherIcons[openweatherIconName] || openweatherIcons.default;
 };
 
 export default getWeatherIcon;
